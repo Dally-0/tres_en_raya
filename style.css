@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    background-color: #f4f4f9;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+
+.tablero {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    background-color: #1a1a1a;
+    border: 5px solid #333;
+}
+
+.celda {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a05858;
+    font-size: 3em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    background: rgba(255, 255, 255, 0.411);
+}
+
+.color-x {
+    color: rgb(255, 255, 255);
+    background: red;
+}
+
+.color-o {
+    color: rgb(255, 255, 255);
+    background: rgb(21, 103, 255);
+}
+
+.celda:hover {
+    background-color: #e0e0e0;
+}
+
+#reiniciar {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-top: 15px;
+    cursor: pointer;
+    background: #04b931;
+    border-radius: 2rem;
+}
