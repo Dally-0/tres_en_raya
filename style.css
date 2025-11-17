@@ -8,8 +8,6 @@ body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-
-
 .tablero {
     display: grid;
     grid-template-columns: repeat(3, 100px);
@@ -52,4 +50,10 @@ body {
     cursor: pointer;
     background: #04b931;
     border-radius: 2rem;
+}
+
+.celda-ganadora {
+    background-color: #28a745 !important; 
+    color: white !important; 
+    box-shadow: 0 0 15px rgba(40, 167, 69, 0.7); 
 }
