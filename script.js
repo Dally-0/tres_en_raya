@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let turno = "X";
+    let turno = "A";
     let tablero = [
         ["", "", ""],
         ["", "", ""],
@@ -13,12 +13,16 @@ $(document).ready(function () {
         if (tablero[fila][columna] === "" && jugando) {
             tablero[fila][columna] = turno;
             $(this).text(turno);
+            $(this).addClass(turno === "B" ? "color-x" : "color-o");
 
-            $(this).addClass(turno === "X" ? "color-x" : "color-o");
-
-            if (comprobarGanador(tablero, turno)) {
-                $("#estado").text(`¡${turno} ha ganado!`);
+            const celdasGanadoras = comprobarGanador(tablero, turno); 
+            if (celdasGanadoras) { 
+                $("#estado").text(`¡Gana el jugador ${turno}!`);
                 jugando = false;
+
+                celdasGanadoras.forEach(([r, c]) => {
+                    $(`.celda[data-pos="${r}-${c}"]`).addClass("celda-ganadora");
+                });
                 return;
             }
 
@@ -28,30 +32,36 @@ $(document).ready(function () {
                 return;
             }
 
-            turno = turno === "X" ? "O" : "X";
+            turno = turno === "B" ? "A" : "B";
             $("#estado").text(`Turno de ${turno}`);
         }
     });
 
     function comprobarGanador(matriz, jugador) {
         const N = 3;
+
         for (let i = 0; i < N; i++) {
             if (matriz[i][0] === jugador && matriz[i][1] === jugador && matriz[i][2] === jugador) {
-                return true;
+                return [[i, 0], [i, 1], [i, 2]]; 
             }
         }
+
         for (let j = 0; j < N; j++) {
             if (matriz[0][j] === jugador && matriz[1][j] === jugador && matriz[2][j] === jugador) {
-                return true;
+                return [[0, j], [1, j], [2, j]]; 
             }
         }
+
+
         if (matriz[0][0] === jugador && matriz[1][1] === jugador && matriz[2][2] === jugador) {
-            return true;
+            return [[0, 0], [1, 1], [2, 2]]; 
         }
+
         if (matriz[0][2] === jugador && matriz[1][1] === jugador && matriz[2][0] === jugador) {
-            return true;
+            return [[0, 2], [1, 1], [2, 0]]; 
         }
-        return false;
+
+        return false; 
     }
 
     $("#reiniciar").click(function () {
@@ -60,10 +70,10 @@ $(document).ready(function () {
             ["", "", ""],
             ["", "", ""]
         ];
-        turno = "X";
+        turno = "A";
         jugando = true;
         $(".celda").text("");
-        $(".celda").removeClass("color-x color-o");
-        $("#estado").text("Turno de X");
+        $(".celda").removeClass("color-x color-o celda-ganadora"); 
+        $("#estado").text("Turno de A");
     });
 });
